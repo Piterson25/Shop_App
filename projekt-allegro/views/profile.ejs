@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mój profil</title>
+  <script defer src="https://localhost:3000/socket.io/socket.io.js"></script>
+  <script defer src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+  <script defer src="client.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a class="Allegro" href="/">Allegro</a></li>
+        <div class="user-info">
+          <% if (user) { %>
+            <li><a href="/add">Dodaj produkt</a></li>
+            <li><a href="/chat">Czat</a></li>
+            <li><a href="/profile">Mój profil</a></li>
+            <li><a href="/logout">Wyloguj</a></li>
+          <% } else { %>
+            <li><a href="/login">Zaloguj się</a></li>
+          <% } %>
+        </div>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <% if (user) { %>
+        <h1><%= user.username %></h1>
+        <h2><%= user.email %></h2>
+        <img src="https://www.oseyo.co.uk/wp-content/uploads/2020/05/empty-profile-picture-png-2-2.png">
+    <% } else if (error) { %>
+        <h1 class="error"><%= error %></h1>
+    <% } %>
+  </main>
+  <footer>
+    <p>© 2023 Copyright: Piotr Maszczak</p>
+  </footer>
+</body>
+
+</html>
