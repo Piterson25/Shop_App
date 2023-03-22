@@ -20,8 +20,8 @@ app.use(cors());
 app.use(express.static('public'));
 
 const httpsOptions = {
-  key: fs.readFileSync("./plik_klucz_bez_hasla.key", "utf8"),
-  cert: fs.readFileSync("./plik_certyfikat.crt", "utf8"),
+  key: fs.readFileSync("./key_no_password.key", "utf8"),
+  cert: fs.readFileSync("./certificate.crt", "utf8"),
 }
 
 const httpsServer = https.createServer(httpsOptions, app);
@@ -48,7 +48,7 @@ io.on('connection', socket => {
   });
   socket.on('disconnect', (user) => {
     if (isChatPage) {
-      logger.info('Użytkownik wyszedl z czatu')
+      logger.info('User left the chat')
       io.emit('user-disconnected')
     }
     isChatPage = false;
@@ -70,7 +70,7 @@ app.get('/products/:id', (req, res) => {
 app.get('/add', (req, res) => {
   const username = req.cookies.user;
   const user = users.find(u => u.username === username);
-  const error = 'Nieprawidłowa ścieżka'
+  const error = 'Invalid path'
   res.render('add', { user, error });
 });
 
@@ -137,7 +137,7 @@ app.post('/login', (req, res) => {
       logger.info(`${username} logged in`);
       res.redirect('/');
     } else {
-      const error = 'Nieprawidłowe dane logowania'
+      const error = 'Invalid login data'
       res.render('login', { error });
     }
   }
@@ -157,12 +157,12 @@ app.get('/register', (req, res) => {
 app.post('/register', (req, res) => {
   const { username, email, password, password2 } = req.body;
   if (username === "admin") {
-    return res.status(403).json({ message: "Rejestracja jako administrator jest zabroniona." });
+    return res.status(403).json({ message: "Registration as admin is disallowed." });
   }
   else if (password !== password2) {
-    res.render('register', { error: 'Hasła są różne' });
+    res.render('register', { error: 'Passwords dont match' });
   } else if (users.some(u => u.username === username) || users.some(e => e.email === email)) {
-    res.render('register', { error: 'Podany użytkownik już istnieje' });
+    res.render('register', { error: 'Given user already exists' });
   } else {
     users.push({ username, email, password });
     res.cookie('user', username, { maxAge: 3600 * 1000 });
@@ -174,7 +174,7 @@ app.post('/register', (req, res) => {
 app.get('/profile', (req, res) => {
   const username = req.cookies.user;
   const user = users.find(u => u.username === username);
-  const error = 'Nie jesteś zalogowany!'
+  const error = 'You are not logged in'
   res.render('profile', { user, error });
 });
 
@@ -185,5 +185,5 @@ app.use((req, res, next) => {
 });
 
 httpsServer.listen(PORT, () => {
-  logger.info(`Serwer https uruchomiony na porcie ${PORT}`);
+  logger.info(`Server https running on port: ${PORT}`);
 });

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://localhost:3000/socket.io/socket.io.js"></script>
+    <script defer src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <script defer src="client.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Log in</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a class="Shop" href="/">Shop app</a></li>
+          <div class="user-info">
+            <li><a href="/login">Log in</a></li>
+            <li><a href="/register">Sign up</a></li>
+          </div>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h1>Log in</h1>
+      <form action="/login" id="loginform" method="post">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" required>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required>
+        <button type="submit" class="button">Log in</button>
+      </form>
+      <% if (error) { %>
+        <div class="error"><%= error %></div>
+      <% } %>
+    </main>
+    <footer>
+      <p>© 2023 Copyright: Piotr Maszczak</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://localhost:3000/socket.io/socket.io.js"></script>
+    <script defer src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <script defer src="client.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Chat</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a class="Shop" href="/">Shop app</a></li>
+          <div class="user-info">
+            <% if (user) { %>
+              <li><a href="/add">Add product</a></li>
+              <li><a href="/chat">Chat</a></li>
+              <li><a href="/profile">My profile</a></li>
+              <li><a href="/logout">Logout</a></li>
+            <% } else { %>
+              <li><a href="/login">Log in</a></li>
+            <% } %>
+          </div>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <% if (user) { %>
+        <div id="chat">
+          <div id="chat-messages"></div>
+          <div hidden id="chat-user"><%= user %></div>
+          <form id="chat-input">
+            <input type="text" id="message-input" placeholder="Write your message">
+            <button type="submit" id="send-button" onclick="event.preventDefault()">Send</button>
+          </form>
+        </div>
+        <% } else if (error) { %>
+          <h1 class="error">
+            <%= error %>
+          </h1>
+          <% } %>
+    </main>
+    <footer>
+      <p>© 2023 Copyright: Piotr Maszczak</p>
+    </footer>
+  </body>
+</html>

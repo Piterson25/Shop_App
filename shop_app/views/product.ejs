@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://localhost:3000/socket.io/socket.io.js"></script>
+    <script defer src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <script defer src="client.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Product</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a class="Shop" href="/">Shop app</a></li>
+          <div class="user-info">
+            <% if (user) { %>
+              <li><a href="/add">Add product</a></li>
+              <li><a href="/chat">Chat</a></li>
+              <li><a href="/profile">My profile</a></li>
+              <li><a href="/logout">Logout</a></li>
+            <% } else { %>
+              <li><a href="/login">Log in</a></li>
+            <% } %>
+          </div>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <% if (product) { %>
+      <div class="product-chat">
+        <div class="product">
+          <% if (user == "admin" || product.owner == user) { %>
+            <a href="/products/edit/<%= product.id %>" class="button">Edit</a>
+          <% } %>
+          <img src="<%= product.thumbnail %>">
+          <% if (product.discountPercentage > 0) { %>
+            <h6 class="crossed-price"><%= product.price %>€</h5>
+              <div class="prices">
+                <h3 class="price"><%= Math.round((100-product.discountPercentage)/100*product.price) %>€</h3>
+                <div class="discount">-<%= product.discountPercentage %>%</div>
+              </div>
+          <% } else { %>
+            <h3 class="price"><%= product.price %>€</h3>
+          <% } %>
+          <h4><%= product.title %></h4>
+          <p><%= product.description %></p>
+          <h3>Rating: <%= product.rating %>⋆</h1>
+          <h6>In stock: <%= product.stock %></h6>
+          <h6>Brand: <%= product.brand %></h6>
+          <h6>Category: <%= product.category %></h6>
+          <h6>Images:</h6>
+          <% product.images.forEach(function(i) { %>
+              <img src="<%= i %>">
+          <% }); %>
+        </div>
+      </div>
+      <% } %>
+    </main>
+    <footer>
+      <p>© 2023 Copyright: Piotr Maszczak</p>
+    </footer>
+  </body>
+</html>

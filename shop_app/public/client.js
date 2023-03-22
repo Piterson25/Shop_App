@@ -100,11 +100,11 @@ window.addEventListener("load", function (event) {
     });
   
     socket.on('user-connected', user => {
-      appendMessage(`${user} dołączył/a do czatu`, 'aliceblue')
+      appendMessage(`${user} joined the chat`, 'aliceblue')
     })
   
     socket.on('user-disconnected', user => {
-      appendMessage(`Użytkownik wyszedł z czatu`, 'aliceblue')
+      appendMessage(`User left the chat`, 'aliceblue')
     })
 
     socket.on('message', (message) => {

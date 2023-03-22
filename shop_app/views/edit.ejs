@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://localhost:3000/socket.io/socket.io.js"></script>
+    <script defer src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <script defer src="client.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Editing product</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a class="Shop" href="/">Shop app</a></li>
+          <div class="user-info">
+            <% if (user) { %>
+              <li><a href="/add">Add product</a></li>
+              <li><a href="/chat">Chat</a></li>
+              <li><a href="/profile">My profile</a></li>
+              <li><a href="/logout">Logout</a></li>
+            <% } else { %>
+              <li><a href="/login">Log in</a></li>
+            <% } %>
+          </div>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h1>Editing product</h1>
+      <% if (product) { %>
+        <form action="/products/edit/<%= product.id %>" method="post" id="editing">
+          <label for="title"> Title:</label>
+          <input type="text" name="title" id="title" required value="<%= product.title %>">
+          <label for="description"> Description:</label>
+          <textarea type="text" name="description" id="description" required><%= product.description %></textarea>
+          <label for="price"> Price(€):</label>
+          <input type="number" name="price" id="price" min=0 required value="<%= product.price %>">
+          <label for="discountPercentage"> Discount(%):</label>
+          <input type="number" name="discountPercentage" step="0.01" min=0 max=100 id="discountPercentage" required
+            value="<%= product.discountPercentage %>">
+          <label for="stock"> Quantity:</label>
+          <input type="number" name="stock" id="stock" min=0 required value="<%= product.stock %>">
+          <label for="brand"> Brand:</label>
+          <input type="text" name="brand" id="brand" required value="<%= product.brand %>">
+          <label for="category"> Category</label>
+          <input type="text" name="category" id="category" required value="<%= product.category %>">
+          <label for="category"> Thumbnail</label>
+          <input type="text" name="thumbnail" id="thumbnail" required value="<%= product.thumbnail %>">
+          <br />
+          <label for="images"> Images</label>
+          <% for (let i=0; i < product.images.length; i++) { %>
+            <input type="text" name="images" id="images" value="<%= product.images[i] %>">
+            <% } %>
+              <button type="submit" class="button">Edit product</button>
+        </form>
+        <% } %>
+    </main>
+    <footer>
+      <p>© 2023 Copyright: Piotr Maszczak</p>
+    </footer>
+  </body>
+</html>
