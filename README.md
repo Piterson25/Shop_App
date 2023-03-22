@@ -10,11 +10,11 @@ Shop App is an e-commerce web application with login and registration features, 
 
 Shop App is built using the following technologies:
 
-* JavaScript
+* Node.js
 * EJS
 * CSS
 
-The application is also built using Express, Socket.io, MQTT.js, Winston, Cookie-parser.
+The application is also built using JavaScript, Express, Socket.io, MQTT.js, Winston, Cookie-parser.
 
 ## 🚀 Getting Started
 To start using Shop App, follow these steps:
