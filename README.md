@@ -13,10 +13,8 @@ Shop App is built using the following technologies:
 * JavaScript
 * EJS
 * CSS
-* Express
-* Socket.io
-* MQTT
-* Cookie-parser
+
+The application is also built using Express, Socket.io, MQTT.js, Winston, Cookie-parser.
 
 ## 🚀 Getting Started
 To start using Shop App, follow these steps:
@@ -38,6 +36,9 @@ Users can search for products using the search bar.
 
 ### Adding, Editing, and Deleting Products
 Users can add new products to the shop, edit or update existing ones, and delete them as needed.
+
+### Winston Logger
+The application logs information using Winston.
 
 ## License
 Shop App is licensed under the MIT License. See [LICENSE](https://github.com/Piterson25/Shop_App/blob/main/LICENSE) for more information.
