@@ -1,6 +1,6 @@
 # Shop App
 
-🛍️ Shop App Web Protocols Project.
+🛍️ E-commerce web application.
 
 ![thumbnail.png](https://github.com/Piterson25/Shop_App/blob/main/thumbnail.png)
 
